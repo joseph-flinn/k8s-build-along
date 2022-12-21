@@ -17,7 +17,7 @@ For this project, we are going to be building out a system that includes a wired
 a NAS.
 
 
-:Picture here:
+![Diagram](https://github.com/joseph-flinn/k8s-build-along/blob/main/assets/home-network-diagram.png)
 
 
 ## Hardware 
