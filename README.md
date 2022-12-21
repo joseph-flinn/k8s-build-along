@@ -4,12 +4,15 @@ A build along project has been requested for a homelab bare metal cluster. This 
 for such a project. The project assumes going from a simple home network with a wifi router with consumer device a
 homelab. It will be covering the following:
 
-- Network design and hardware Node hardware Software Collaboration around automation
+- Network design and hardware 
+- Node hardware
+- Software 
+- Collaboration around automation
 
 ## Project Goals
 
-- Build a low cost bare metal kubernetes cluster for a homelab to have a platform to test different kubernetes patterns
-- locally
+- Build a low cost bare metal kubernetes cluster for a homelab to have a platform to test different kubernetes patterns 
+  locally
 
 ## Network Architecture Overview 
 
