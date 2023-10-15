@@ -1,0 +1,32 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  NODE_MACS: '<MAC_1>,<MAC_2>,<MAC_3>'
+  LOCAL_IP: 
+    sh: ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/' | xargs
+
+
+tasks:
+  run-pixiecore:talos:
+    silent: true
+    cmds:
+      - sudo iptables -I INPUT -p udp -m multiport --dports 67,69,4011 -j ACCEPT
+      - sudo iptables -I INPUT -p tcp -m multiport --dports 80,8081,64172 -j ACCEPT
+      - echo "LOCAL_IP={{.LOCAL_IP}}" > .env
+      - docker compose up -d talos-config pixiecore
+
+  boot:
+    silent: true
+    cmds:
+      - for: { var: NODE_MACS, split: ','}
+        cmd: wakeonlan {{ .ITEM }}
+
+  cleanup:
+    silent: true
+    cmds:
+      - docker compose down
+      - rm .env
+      - sudo iptables -D INPUT -p udp -m multiport --dports 67,69,4011 -j ACCEPT
+      - sudo iptables -D INPUT -p tcp -m multiport --dports 80,8081,64172 -j ACCEPT

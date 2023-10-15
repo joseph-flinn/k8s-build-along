@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  pixiecore:
+    image: pixiecore/pixiecore:master
+    network_mode: 'host'
+    volumes:
+      - ./image:/image
+    command: "boot /image/talos-1.5.3-vmlinuz-amd64 /image/talos-1.5.3-initramfs-amd64.xz --cmdline='talos.platform=metal slab_nomerge pti=on talos.config=http://10.3.0.100:8081/configs/$${mac}.yaml'"
+
+  talos-config:
+    image: nginx:latest
+    volumes:
+      - ./default.conf.template:/etc/nginx/templates/default.conf.template
+      - ./configs/:/www/data/configs
+    ports:
+      - 8081:8081
+    environment:
+      NGINX_PORT: 8081
+
+
