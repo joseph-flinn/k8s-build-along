@@ -4,14 +4,11 @@
 
 - nodes set up with PXE boot
   - Note: a lot of ARM SBCs do not support PXE boot, so keep this in mind
-- C2 machine (command & control) on the same subnet/vlan
-- nix-shell OR
+- C2 machine (command & control) on the same subnet/vlan with:
+  - go-task
   - wakeonlan
-  - xz
 
 ## Setup
-
-0. [optional] Setup dev environment: `nix-shell`
 
 1. Download the latest PXE Boot artifacts:
 ```
@@ -40,14 +37,12 @@ talosctl gen configs --with-secrets secrets.yaml talos-general https://10.3.0.50
 ## Install Talos Linux
 
 ```
-# install dependencies
-nix-shell
-
 # run pixiecore and static fileserver
 task run-pixiecore:talos
 
 # boot over lan
 task boot 
 
-# Proceed with cluster set with talosctl
+# Proceed with cluster set up with talosctl
+# https://www.talos.dev/v1.5/introduction/prodnotes/#further-details-about-talosctl-endpoints-and-nodes
 ```
