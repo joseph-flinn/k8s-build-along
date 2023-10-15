@@ -3,21 +3,26 @@
 ## Requirements
 
 - nodes set up with PXE boot
-- C2 on the same subnet/vlan
+  - Note: a lot of ARM SBCs do not support PXE boot, so keep this in mind
+- C2 machine (command & control) on the same subnet/vlan
 - nix-shell OR
   - wakeonlan
   - xz
 
 ## Setup
 
+0. [optional] Setup dev environment: `nix-shell`
+
 1. Download the latest PXE Boot artifacts:
 ```
-wget -O <link> ./images/talos-initramfs.xz
-wget -O <link> ./images/talos-vmlinuz
+mkdir image
+wget -O <link> ./image/talos-initramfs.xz
+wget -O <link> ./image/talos-vmlinuz
 ```
 
 2. Generate configs
 ```
+mkdir configs
 cd configs
 talosctl gen secrets -o secrets.yaml
 talosctl gen configs --with-secrets secrets.yaml talos-general https://10.3.0.50:6443  # going with the VIP HA architecture
