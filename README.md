@@ -64,3 +64,8 @@ run an Ubuntu server on a mini pc with 32 GB storage and routinely ran out of di
 Intel processors will remove any issues running specific docker containers. It will also provide flexibility for the
 hardware for future uses if the k8s cluster doesn’t have a permanent place in your homelab.
 
+
+## Software
+
+- OS: Talos Linux
+- GitOps: ArgoCD
