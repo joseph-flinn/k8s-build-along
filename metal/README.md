@@ -17,7 +17,7 @@ wget -O <link> ./image/talos-initramfs.xz
 wget -O <link> ./image/talos-vmlinuz
 ```
 
-2. Generate configs
+2. Generate Talos configs
 ```
 mkdir configs
 cd configs
@@ -25,13 +25,16 @@ talosctl gen secrets -o secrets.yaml
 talosctl gen configs --with-secrets secrets.yaml talos-general https://10.3.0.50:6443  # going with the VIP HA architecture
 ```
 
-3. [Optional] Customize configs OR update compose.yaml
+3. Customize Talos configs
 
 - Copy the `controlplane.yaml` to the `${mac}.yaml` of each machine. This is required if hosting specialized configs per
   machine. This is on by default to set the hostname by setting the `talos.configs` kernel param in the `compose.yaml` file.
 - Set up installation to disk if desired (not on by default)
 - Set up networking
 - Set up hostname
+
+4. Update the `NODE_MACS` variable in `Taskfile.yaml` to be a CSV string of the MAC addresses of the nodes to install
+   talos on
 
 
 ## Install Talos Linux
